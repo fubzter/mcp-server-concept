@@ -130,7 +130,7 @@ This guided prompt will:
 
 See [docs/manage-app-registrations.md](docs/manage-app-registrations.md) for details.
 
-**Optional:** If you are also building an agent or client app that calls the MCP server, run `/create-agent-account` to create the agent app registration with delegated permissions.
+**Optional:** If you are integrating the MCP server with Copilot or other clients that use APIM (Azure API Management) and require an agent or client app with delegated permissions, run `/create-agent-account` to create the agent app registration.
 
 ### 5. Run `/new-mcp-server` in GitHub Copilot Chat
 
@@ -197,9 +197,9 @@ GitHub Actions triggers automatically: builds the Docker image, pushes it to ACR
 
 After the first successful deployment, find the Container App's public URL in the Azure Portal (or via `az containerapp show`). Update `EntraIdAuth__PublicUrl` in the bicepparam file and push again. Then add `Copilot/CustomConnectors/{ServerName}.swagger.json` as a Copilot Custom Connector in Copilot Studio.
 
-### 11. (Optional) Add a web reply URI for agent apps
+### 11. (Optional) Add a web reply URI for agent/client apps
 
-If you created an agent app with `/create-agent-account` and it is a web client that uses OAuth 2.0 redirects, run:
+If you created an agent app with `/create-agent-account` for Copilot or APIM integration and the client is a web application using OAuth 2.0 redirects, run:
 
 ```
 /set-reply-uri

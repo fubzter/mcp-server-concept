@@ -1,11 +1,11 @@
 ---
 mode: agent
-description: Create or update the agent app registration and store credentials in Key Vault. Triggered by "/create-agent-account".
+description: Create or update the agent/client app registration for Copilot or APIM integration. Triggered by "/create-agent-account".
 ---
 
 # Create Agent Account
 
-You are creating an app registration for an AI agent that will call the MCP server and storing its credentials in Azure Key Vault by using repository scripts. Follow EVERY step exactly. Do NOT skip steps or reorder them.
+You are creating an app registration for an agent or client application that calls the MCP server (for Copilot or APIM scenarios) and storing its credentials in Azure Key Vault by using repository scripts. This step is **only required** if you are integrating with Copilot or other clients that use APIM. Follow EVERY step exactly. Do NOT skip steps or reorder them.
 
 Use only these scripts for execution logic:
 - `scripts/Validate-ProvisioningEnvironment.ps1`

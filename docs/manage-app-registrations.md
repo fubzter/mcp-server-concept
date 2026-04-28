@@ -6,10 +6,13 @@ This guide covers the three Copilot agent commands for managing Entra ID app reg
 
 ## Overview
 
-Each MCP server deployment requires two app registrations:
+Each MCP server deployment requires one app registration:
 
-1. **MCP App Registration** (`mcp-{ServerName}`) — Protects the MCP server endpoint. Called by Copilot agents.
-2. **Agent App Registration** (`agent-{ServerName}`) — Used by AI agents or client apps to authenticate and call the MCP server with delegated permissions.
+1. **MCP App Registration** (`mcp-{ServerName}`) — Protects the MCP server endpoint. Called by upstream clients (including Copilot agents, if directly integrated).
+
+**Optional:** If you are integrating the MCP server with **Copilot or other clients that use APIM** and need an agent or client app to authenticate and call the MCP server with delegated permissions, you may also create:
+
+2. **Agent App Registration** (`agent-{ServerName}`) — Used by AI agents or client applications to authenticate with delegated permissions to call the MCP server. Only required for Copilot Studio custom connectors or APIM-based scenarios.
 
 Both registrations store their credentials in Azure Key Vault for secure retrieval at runtime.
 
@@ -36,23 +39,23 @@ Both registrations store their credentials in Azure Key Vault for secure retriev
              │
              ▼
 ┌────────────────────────────────────┐
-│  2. /create-mcp-account            │  (Create app for MCP server endpoint)
-│     - Creates app registration     │
+│  2. /create-mcp-account            │  (Required)
+│     - Creates app for MCP server   │
 │     - Exposes API scope            │
 │     - Stores credentials in KV     │
 └────────────┬───────────────────────┘
              │
              ▼
 ┌────────────────────────────────────┐
-│  3. /create-agent-account          │  (Create app for agent/client)
-│     - Creates app registration     │
+│  3. /create-agent-account          │  (Optional: Copilot/APIM only)
+│     - Creates app for agent/client │
 │     - Adds delegated permissions   │
 │     - Stores credentials in KV     │
 └────────────┬───────────────────────┘
              │
              ▼
 ┌────────────────────────────────────┐
-│  4. /set-reply-uri (optional)      │  (Add OAuth redirect URI)
+│  4. /set-reply-uri (optional)      │  (Optional: web clients with OAuth redirects)
 │     - For web client apps          │
 │     - Adds web reply URI           │
 │     - Idempotent (no-op if exists) │
@@ -117,13 +120,15 @@ Next step: Run /create-agent-account to create the agent app registration...
 
 ---
 
-## Step 2: Create Agent Account
+## Step 2: Create Agent Account (Optional)
 
 Run:
 
 ```
 /create-agent-account
 ```
+
+**Note:** This step is **optional** and only required if you are integrating the MCP server with **Copilot Studio custom connectors or APIM-based clients** that need an agent or client application to authenticate with delegated permissions to call the MCP server. If your MCP server is called directly (e.g., by a backend service), skip this step.
 
 ### What it does
 
@@ -178,18 +183,21 @@ A tenant administrator can pre-grant admin consent in the Azure Portal to skip t
 
 ---
 
-## Step 3: Set Reply URI (Optional)
+## Step 3: Set Reply URI (Optional — Web Clients Only)
 
-Run (only if the agent is a web client app that needs OAuth 2.0 redirects):
+Run (only if the agent is a **web client application** using OAuth 2.0 redirects):
 
 ```
 /set-reply-uri
 ```
 
+**Note:** This step is only required for web applications that use OAuth 2.0 authentication flows with client-side redirects (e.g., single-page applications, web portals). It is not needed for backend services, desktop applications, or server-to-server authentication scenarios.
+
 ### What it does
 
 - Adds a web reply URI (OAuth 2.0 redirect URI) to an app registration
 - Looks up the app by Application ID (GUID) or display name
+- If multiple apps have the same name, prompts you to choose the correct one
 - Idempotent: no-op if the URI already exists
 - Does not require Key Vault access (no secrets written)
 

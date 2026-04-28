@@ -156,4 +156,6 @@ Print:
 
 Print next steps:
 
-> **Next step:** Run **/create-agent-account** to create the agent app registration that calls this MCP server, or if you are setting up a client that calls this MCP server, run **/set-reply-uri** to add its redirect URI.
+> **Next step:** 
+> - If you are integrating this MCP server with **Copilot or APIM clients**, run **/create-agent-account** to create an agent app registration with delegated permissions.
+> - If you have a **web client application**, run **/set-reply-uri** to add its OAuth 2.0 redirect URI.
