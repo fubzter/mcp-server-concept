@@ -1,0 +1,15 @@
+interface:
+  display_name: "Tilbudsdata"
+  short_description: "Use Danish offer data via MCP"
+  default_prompt: "Use $tilbudsdata to find current Danish offers from Tilbudsdata."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "tilbudsdata"
+      description: "Tilbudsdata MCP server for Danish offer, category, chain, brand, and product data."
+      transport: "streamable_http"
+      url: "https://tilbudsdata.orangehill-a3d65116.westeurope.azurecontainerapps.io/mcp"
+
+policy:
+  allow_implicit_invocation: true
