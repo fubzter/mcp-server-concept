@@ -20,6 +20,16 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "preLaunchTask": "build Tilbudsdata"
+    },
+    {
+      "name": "fortidspensionistmcp",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/MCPServers/fortidspensionistmcp/fortidspensionistmcp.csproj",
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "preLaunchTask": "build fortidspensionistmcp"
     }
   ]
 }

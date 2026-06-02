@@ -20,6 +20,16 @@
         "${workspaceFolder}/MCPServers/Tilbudsdata/Tilbudsdata.csproj"
       ],
       "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "build fortidspensionistmcp",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/MCPServers/fortidspensionistmcp/fortidspensionistmcp.csproj"
+      ],
+      "problemMatcher": "$msCompile"
     }
   ]
 }
