@@ -1,8 +1,8 @@
 using 'main.bicep'
 
 // Shared registry — keep acrName and acrResourceGroupName identical in prod.bicepparam
-param acrName             = 'mymcpacr'
-param acrResourceGroupName = 'rg-mymcpacr'
+param acrName             = 'fubztermcpacr'
+param acrResourceGroupName = 'rg-fubztermcpacr'
 
 // Dev-environment resources
 param containerAppsEnvName = 'mymcpdev'
