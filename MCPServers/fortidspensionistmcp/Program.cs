@@ -49,6 +49,6 @@ app.UseAuthorization();
 
 var serverUrl = configuration["ServerUrl"] ?? "http://0.0.0.0:4547";
 
-app.MapMcp().RequireAuthorization();
+app.MapMcp();
 
 app.Run(serverUrl);
