@@ -50,7 +50,7 @@ param environment = [
   }
   {
     name: 'EntraIdAuth__PublicUrl'
-    value: 'TODO-public-url-after-first-deploy'
+    value: 'https://tilbudsdata.orangehill-a3d65116.westeurope.azurecontainerapps.io'
   }
   {
     name: 'IsTransportStateless'
