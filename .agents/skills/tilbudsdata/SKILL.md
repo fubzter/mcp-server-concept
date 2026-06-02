@@ -13,7 +13,7 @@ The MCP server should be configured as:
 
 ```toml
 [mcp_servers.tilbudsdata]
-url = "https://tilbudsdata.orangehill-a3d65116.westeurope.azurecontainerapps.io/mcp"
+url = "https://tilbudsdata.orangehill-a3d65116.westeurope.azurecontainerapps.io/"
 ```
 
 If the tools are not visible, ask the user to restart Codex and check `/mcp`.

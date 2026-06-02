@@ -9,7 +9,7 @@ dependencies:
       value: "tilbudsdata"
       description: "Tilbudsdata MCP server for Danish offer, category, chain, brand, and product data."
       transport: "streamable_http"
-      url: "https://tilbudsdata.orangehill-a3d65116.westeurope.azurecontainerapps.io/mcp"
+      url: "https://tilbudsdata.orangehill-a3d65116.westeurope.azurecontainerapps.io/"
 
 policy:
   allow_implicit_invocation: true
