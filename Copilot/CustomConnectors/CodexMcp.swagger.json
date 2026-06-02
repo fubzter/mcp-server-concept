@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "TODO-public-url-after-first-deploy"
+      "url": "https://codexmcp.orangehill-a3d65116.westeurope.azurecontainerapps.io"
     }
   ],
   "paths": {
