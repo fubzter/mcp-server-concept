@@ -25,18 +25,19 @@ public abstract class BaseHttpService
     /// </summary>
     protected async Task<string> GetAsync(string url)
     {
-        _logger.LogInformation("Sending GET request to {Url}", url);
+        var safeUrl = RedactSensitiveQueryParameters(url);
+        _logger.LogInformation("Sending GET request to {Url}", safeUrl);
         try
         {
             var response = await _client.GetAsync(url);
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
-            _logger.LogInformation("Received successful response from {Url}", url);
+            _logger.LogInformation("Received successful response from {Url}", safeUrl);
             return content;
         }
         catch (HttpRequestException ex)
         {
-            _logger.LogError(ex, "HTTP request failed for {Url}", url);
+            _logger.LogError(ex, "HTTP request failed for {Url}", safeUrl);
             throw;
         }
     }
@@ -46,19 +47,61 @@ public abstract class BaseHttpService
     /// </summary>
     protected async Task<string> PostAsync(string url, HttpContent content)
     {
-        _logger.LogInformation("Sending POST request to {Url}", url);
+        var safeUrl = RedactSensitiveQueryParameters(url);
+        _logger.LogInformation("Sending POST request to {Url}", safeUrl);
         try
         {
             var response = await _client.PostAsync(url, content);
             response.EnsureSuccessStatusCode();
             var responseContent = await response.Content.ReadAsStringAsync();
-            _logger.LogInformation("Received successful response from {Url}", url);
+            _logger.LogInformation("Received successful response from {Url}", safeUrl);
             return responseContent;
         }
         catch (HttpRequestException ex)
         {
-            _logger.LogError(ex, "HTTP POST request failed for {Url}", url);
+            _logger.LogError(ex, "HTTP POST request failed for {Url}", safeUrl);
             throw;
         }
+    }
+
+    private static string RedactSensitiveQueryParameters(string url)
+    {
+        if (!Uri.TryCreate(url, UriKind.Absolute, out var uri) || string.IsNullOrEmpty(uri.Query))
+        {
+            return url;
+        }
+
+        var query = uri.Query.TrimStart('?').Split('&', StringSplitOptions.RemoveEmptyEntries);
+        var redactedQuery = query.Select(parameter =>
+        {
+            var separatorIndex = parameter.IndexOf('=');
+            var key = separatorIndex >= 0 ? parameter[..separatorIndex] : parameter;
+            var decodedKey = Uri.UnescapeDataString(key);
+
+            if (IsSensitiveQueryParameter(decodedKey))
+            {
+                return $"{key}=<redacted>";
+            }
+
+            return parameter;
+        });
+
+        var builder = new UriBuilder(uri)
+        {
+            Query = string.Join('&', redactedQuery)
+        };
+
+        return builder.Uri.ToString();
+    }
+
+    private static bool IsSensitiveQueryParameter(string key)
+    {
+        return key.Equals("_signature", StringComparison.OrdinalIgnoreCase)
+            || key.Equals("signature", StringComparison.OrdinalIgnoreCase)
+            || key.Equals("api_key", StringComparison.OrdinalIgnoreCase)
+            || key.Equals("apikey", StringComparison.OrdinalIgnoreCase)
+            || key.Equals("access_token", StringComparison.OrdinalIgnoreCase)
+            || key.Equals("token", StringComparison.OrdinalIgnoreCase)
+            || key.Equals("client_secret", StringComparison.OrdinalIgnoreCase);
     }
 }
