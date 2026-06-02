@@ -1,0 +1,50 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "CodexMcp MCP Server",
+    "description": "Custom connector for the CodexMcp MCP server via Copilot Studio",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "TODO-public-url-after-first-deploy"
+    }
+  ],
+  "paths": {
+    "/sse": {
+      "get": {
+        "summary": "MCP SSE endpoint",
+        "operationId": "McpSse",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "SSE stream"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "oauth2": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://login.microsoftonline.com/b3f0b16b-81f9-4c36-a9ba-2b7fc139f0cb/oauth2/v2.0/authorize",
+            "tokenUrl": "https://login.microsoftonline.com/b3f0b16b-81f9-4c36-a9ba-2b7fc139f0cb/oauth2/v2.0/token",
+            "scopes": {
+              "api://56cebd86-68fa-498e-b8f1-5926244caf08/mcp.tools": "Access CodexMcp MCP Server"
+            }
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "oauth2": [
+        "api://56cebd86-68fa-498e-b8f1-5926244caf08/mcp.tools"
+      ]
+    }
+  ]
+}

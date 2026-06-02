@@ -1,4 +1,15 @@
 {
   "version": "2.0.0",
-  "tasks": []
+  "tasks": [
+    {
+      "label": "build CodexMcp",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/MCPServers/CodexMcp/CodexMcp.csproj"
+      ],
+      "problemMatcher": "$msCompile"
+    }
+  ]
 }
