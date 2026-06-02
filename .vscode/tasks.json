@@ -10,6 +10,16 @@
         "${workspaceFolder}/MCPServers/CodexMcp/CodexMcp.csproj"
       ],
       "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "build Tilbudsdata",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/MCPServers/Tilbudsdata/Tilbudsdata.csproj"
+      ],
+      "problemMatcher": "$msCompile"
     }
   ]
 }

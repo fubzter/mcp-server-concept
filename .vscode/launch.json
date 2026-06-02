@@ -10,6 +10,16 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "preLaunchTask": "build CodexMcp"
+    },
+    {
+      "name": "Tilbudsdata",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/MCPServers/Tilbudsdata/Tilbudsdata.csproj",
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "preLaunchTask": "build Tilbudsdata"
     }
   ]
 }
