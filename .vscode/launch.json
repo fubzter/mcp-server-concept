@@ -30,6 +30,16 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "preLaunchTask": "build fortidspensionistmcp"
+    },
+    {
+      "name": "AteaTimeMcp",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/MCPServers/AteaTimeMcp/AteaTimeMcp.csproj",
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "preLaunchTask": "build AteaTimeMcp"
     }
   ]
 }

@@ -13,6 +13,11 @@ MCP servers expose tools that AI assistants (such as GitHub Copilot or Microsoft
 - **Copilot agent prompts** that guide you through deployment setup and server creation step by step
 - **Reusable GitHub Actions workflows** for building Docker images and deploying to Azure Container Apps
 
+This repository also contains `AteaTimeMcp`, a local-first MCP server for Atea
+Time. It is distributed to colleagues as a local tool, not as an Azure Container
+App, because it uses each user's own browser session. See
+[docs/atea-time-mcp.md](docs/atea-time-mcp.md).
+
 ---
 
 ## Architecture

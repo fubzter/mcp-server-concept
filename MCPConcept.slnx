@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/MCPServers/">
+    <Project Path="MCPServers/AteaTimeMcp/AteaTimeMcp.csproj" />
     <Project Path="MCPServers/CodexMcp/CodexMcp.csproj" />
     <Project Path="MCPServers/fortidspensionistmcp/fortidspensionistmcp.csproj" />
     <Project Path="MCPServers/Shared/Shared.csproj" />

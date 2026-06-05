@@ -30,6 +30,16 @@
         "${workspaceFolder}/MCPServers/fortidspensionistmcp/fortidspensionistmcp.csproj"
       ],
       "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "build AteaTimeMcp",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/MCPServers/AteaTimeMcp/AteaTimeMcp.csproj"
+      ],
+      "problemMatcher": "$msCompile"
     }
   ]
 }
